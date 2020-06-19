@@ -4,7 +4,6 @@ const app = express();
 const Logs = require("./models/Logs");
 
 app.use(express.json());
-app.use(express.static("public"));
 
 const logContainer = new Logs();
 
