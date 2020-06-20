@@ -5,19 +5,32 @@ const Logs = require("./models/Logs");
 
 app.use(express.json());
 
-const logContainer = new Logs();
+let logContainer = [];
 
+/**
+ * POST has an instant response to provide
+ * live activity log.
+ */
 app.post("/api", (req, res) => {
-  logContainer.moves = req.body.board;
-  logContainer.winner = req.body.winner;
-  console.log(logContainer.moves);
-  console.log(logContainer.winner);
+  if(!req.body.board.includes('O')){
+    logContainer = [];
+  }
+  logContainer.push(new Logs(req.body.board, req.body.winner, new Date().toLocaleTimeString()))
+  console.log(req.body.board);
+  console.log(req.body.winner);
   res.send({
-    moves: logContainer.moves,
-    winner: logContainer.winner,
+    moves: req.body.board,
+    winner: req.body.winner,
     time: new Date().toLocaleTimeString(),
   });
 });
+
+/**
+ * To get full session log in one place.
+ */
+app.get('/api', (req, res) => {
+  res.send(logContainer)
+})
 
 app.listen(port, (err) => {
   if (err) {

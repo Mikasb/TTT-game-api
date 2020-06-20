@@ -1,6 +1,9 @@
 class Logs {
-  _moves = Array(9).fill("");
-  _winner = "";
+  constructor(moves, winner, time) {
+    this._moves = moves;
+    this._winner = winner;
+    this._time = time;
+  }
 
   get moves() {
     return this._moves;
