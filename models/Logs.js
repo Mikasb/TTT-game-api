@@ -1,8 +1,8 @@
 class Logs {
   constructor(moves, winner, time) {
-    this._moves = moves;
-    this._winner = winner;
-    this._time = time;
+    this._moves = moves; //array displaying moves made by players
+    this._winner = winner; //displays winner if there is one, otherwise - "none"
+    this._time = time; //timestamp to display when the move was made
   }
 
   get moves() {
